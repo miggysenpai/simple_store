@@ -1,0 +1,67 @@
+/*--------------------------------------------------------------
+# Global Sections
+--------------------------------------------------------------*/
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 40px 0;
+  scroll-margin-top: 90px;
+  overflow: clip;
+}
+
+@media (max-width: 1199px) {
+
+  section,
+  .section {
+    scroll-margin-top: 66px;
+  }
+}
+
+/*--------------------------------------------------------------
+# Global Section Titles
+--------------------------------------------------------------*/
+.section-title {
+  margin-bottom: 60px;
+  position: relative;
+
+  .section-title-container {
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--default-color);
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 000;
+  }
+
+  p {
+    margin-bottom: 0;
+
+    a {
+      color: var(--default-color);
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.5px;
+      border-bottom: 1.5px solid var(--default-color);
+      font-family: var(--nav-font);
+      font-weight: 500;
+      padding-bottom: 2px;
+    }
+  }
+}
+
+@import './sections/_slider.scss';
+@import './sections/_trending-category.scss';
+@import './sections/_culture-category.scss';
+@import './sections/_business-category.scss';
+@import './sections/_lifestyle-category.scss';
+@import './sections/_about.scss';
+@import './sections/_team.scss';
+@import './sections/_starter-section.scss';
+@import './sections/_blog-details.scss';
+@import './sections/_blog-comments.scss';
+@import './sections/_comment-form.scss';
+@import './sections/_blog-posts.scss';
+@import './sections/_blog-pagination.scss';
+@import './sections/_contact.scss';
