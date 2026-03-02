@@ -1289,6 +1289,7 @@ if(!isset($_SESSION['cart'])){
                     'description' => $_POST['product_description'],
                     'status' => "0",
                     'sold_out' => "1",
+                    'purchase_count' => "0",
                 ];
                 $result = $db->insert('simple_store_products', $fields); // inserts into database
                 $last_id = $db->lastId(); // gets lastId for new product redirect

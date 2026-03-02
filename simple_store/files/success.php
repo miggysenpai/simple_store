@@ -19,6 +19,8 @@ if(!isset($_SESSION['cart'])){
 // this empties cart, as checkout was successfull  
 if(isset($_SESSION['cart'])){
      unset($_SESSION['cart']);
+     $_SESSION['cart'] = [];
+     
 }   
 
 $contact_email = $db->query("SELECT * FROM simple_store_settings ")->first(); // get store contact info 
@@ -80,6 +82,7 @@ $checkout_fields = [
     'session_id' => $_GET['session_id'],
     'payment_intent_id' => $session->payment_intent,
     'receipt_number' => $receipt_number,
+    'amount_subtotal' => $session->amount_subtotal,
     'amount_total' => $session->amount_total,
     'amount_shipping' => $amount_shipping,
     'amount_tax' => $amount_tax,
@@ -122,6 +125,18 @@ if(!isset($db_check->id)){
             'purchased_date' => $session->created,
             ];
             $result_2 = $db->insert('simple_store_transactions_item', $ordered_item_loop);
+            
+            $product_check = $db->query("SELECT * FROM simple_store_products WHERE id = ?",[$item_id->product_id])->first(); // get product info 
+            $product_qty = (int)$itemInfo['quantity'];
+            $product_p_c = (int)$product_check->purchase_count;
+            $product_add = $product_qty + $product_p_c;
+            $product_add_field = [ 
+                'purchase_count' => $product_add
+                ]
+                
+                ; 
+            $result_3 = $db->update('simple_store_products', $item_id->product_id, $product_add_field);
+            
             unset($ordered_item_loop);
     }
     

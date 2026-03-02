@@ -76,7 +76,8 @@ $db->query("CREATE TABLE `simple_store_products` (
   `image3` varchar(1000) NOT NULL,
   `image4` varchar(1000) NOT NULL,
   `status` int NOT NULL,
-  `sold_out` varchar(2) NOT NULL
+  `sold_out` varchar(2) NOT NULL,
+  `purchase_count` varchar(1000) NOT NULL,
 )");
 $db->query("ALTER TABLE `simple_store_products`
   ADD PRIMARY KEY (`id`)");
@@ -163,6 +164,7 @@ $db->query("CREATE TABLE `simple_store_stripe_transactions` (
   `session_id` varchar(1000) NOT NULL,
   `payment_intent_id` varchar(100) NOT NULL,
   `receipt_number` varchar(1000) NOT NULL,
+  `amount_subtotal` varchar(1000) NOT NULL,
   `amount_total` varchar(1000) NOT NULL,
   `amount_shipping` varchar(1000) NOT NULL,
   `amount_tax` varchar(1000) NOT NULL,
