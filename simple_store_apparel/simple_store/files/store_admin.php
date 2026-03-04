@@ -3200,28 +3200,18 @@ if(!isset($_SESSION['cart'])){
             $store = $db->query("SELECT * FROM simple_store_settings")->first(); // get store settings
             $order_info = $db->query("SELECT * FROM simple_store_stripe_transactions WHERE id = ?",[$_GET["order_id"]])->first(); // get order info
             ?>
-            <div class='order-confirmation-1'>
-              <div class='next-steps  p-4'  >
+            
                 <h3 class='text-center'>Ordered Items</h3>
                 
                  <section id='cart' class='cart section'>
-                  <div class='container' >
+                  <div class='container order-confirmation' >
                   <a class='btn btn-secondary' href='?id=edit_order&order_id=<?=$_GET["order_id"]?>' aria-label='Go Back to order'>Back to order</a> <br/><br/>
-                  <div class='row g-4'>
-                  <div class='col-lg-12' >
-                    <div class='cart-items'>
-                      <div class='cart-header d-none d-lg-block'>
-                        <div class='row align-items-center gy-4'>
-                          <div class='col-lg-12'>
-                            <h5>Ordered Items</h5>
-                          </div>
-                        </div>
-                      </div>
+                  <div class='row g-4 main-content'>
+                  <div class='col-lg-12 details-card' >
+                    <div class='card-body'>
+                      
                                   
-                        <div class="order-confirmation">
-                          <div class="order-summary mb-4" >
-                                <h4>Order Summary</h4>
-                                <div class="order-items mt-3">
+                        
                         
                         <form method="post" action="pdf.php">
                         <input class="d-none" type="text"  name="site_name" value="<?=$_SERVER['SERVER_NAME']?>" hidden>
@@ -3245,25 +3235,28 @@ if(!isset($_SESSION['cart'])){
                             $product_local = $db->query("SELECT * FROM simple_store_products WHERE id = ?",[$product_local_variant->product_id])->first(); // get product info
                             $product_img = $db->query("SELECT * FROM simple_store_products_images WHERE product_id = ? AND is_primary = ?",[$product_local->id, "1"])->first(); // get product info
                             
-                         ?>        
-                        
-                          <div class="item-row d-flex">
-                            <div class="item-image">
-                              <img src="<?=$product_img->image?>" alt="Product" class="img-fluid" loading="lazy">
-                            </div>
-                            <div class="item-details">
-                              <h5><?=$product_local->name?></h5>
-                              <p class="text-muted">Color: <?=$product_local->color?> / Size: <?=$product_local_variant->size?></p>
-                              <div class="quantity-price d-flex justify-content-between">
-                                <span>Qty: <?=$productInfo->qty?></span>
-                                
-                                <input class="d-none" type="text"  name="product[<?=$prod_array?>][name]"  value="<?=$product_local->name?>" hidden>
-                                <input class="d-none" type="text" name="product[<?=$prod_array?>][quanity]"  value="<?=$productInfo->qty?>" hidden>
-                                 <?php $prod_array = $prod_array + 1; ?>
-                                
+                         ?>
+                         <div class="item">
+                              <div class="item-image">
+                                <img src="<?=$product_img->image?>" alt="Product" loading="lazy">
+                              </div>
+                              <div class="item-details">
+                                <h4><?=$product_local->name?></h4>
+                                <div class="item-meta">
+                                  <span class="">Color: <?=$product_local->color?></span>
+                                  <span>Size: <?=$product_local_variant->size?></span>
+                                </div>
+                                <div class="item-price">
+                                  <span class="quantity"><?=$productInfo->qty?> ×</span>
+                                  <span class="price">$ <?=$product_local->price?></span>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                            
+                        <input class="d-none" type="text"  name="product[<?=$prod_array?>][name]"  value="<?=$product_local->name?>" hidden>
+                        <input class="d-none" type="text" name="product[<?=$prod_array?>][quanity]"  value="<?=$productInfo->qty?>" hidden>
+                        <?php $prod_array = $prod_array + 1; ?>  
+                       
                       <?php } ?>
                       <br />
                       <button type="submit" class="btn border rounded">View Ordered in PDF</button>
