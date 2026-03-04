@@ -1099,7 +1099,7 @@ if(!isset($_SESSION['cart'])){
                                   if (count($products_variant) === 0) {
                                     echo "
                                       <div class='col-lg-2'>
-                                        <a href='?id=add_variant&product_id=".$product_info->id."&post=add' class='btn border rounded' aria-label='Add varient Page'>Add a variant</a>
+                                        <a href='?id=add_variant&product_id=".$product_info->id."&post=add' class='btn border rounded' aria-label='Add variant Page'>Add a variant</a>
                                       </div>";
                                   } else {echo "<div class='col-lg-2'></div>";}
 
@@ -1286,7 +1286,7 @@ if(!isset($_SESSION['cart'])){
                               <div class='col-lg-12'>
                                 <h5>**This will only delete from local database. It will NOT DELETE from stripe account
                                     <br /><br />
-                                    Deleting varient may cause issues when customer tries to track order. 
+                                    Deleting variant may cause issues when customer tries to track order. 
                                 </h5>
                               </div>
                             </div>
