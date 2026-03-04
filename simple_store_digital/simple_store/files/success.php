@@ -251,9 +251,11 @@ if(!isset($db_check->id)){
                         <div class="hero-container" >
                             <img src="">
                             <p class="title"> Thanks for your order!</p>
-                            <p>Great news! Your order is confirmed! We will send you the tracking information once your order ships!</p>
+                            <p>We have received your payment and your files are available for instant download!</p>
                             <br />
-                            <a href="https://{{params.domainName}}/trackorder.php"><button>Track your order</button></a>
+                            <p>This is a DIGITAL PRODUCT, No physical item will be sent!</p>
+                            <br />
+                            <a href="https://{{params.domainName}}/trackorder.php"><button>View your order</button></a>
                             <br /><br />
                         </div>
                     </div>
@@ -293,7 +295,7 @@ if(!isset($db_check->id)){
                             </tr>
                             <tr></tr>
                             <tr>
-                                <td ><strong>Shipping Address</strong></td>
+                                <td ><strong>Billing Address</strong></td>
                             </tr>
                             <tr>
                                 <td>{{params.addressLine1}}</td>
@@ -446,7 +448,7 @@ $result2 = $client->transactionalEmails->sendTransacEmail(
                         <div class="hero-container" >
                             <img src="">
                             <p class="title"> Order was Placed!</p>
-                            <p>Great news! Someone placed an order! Time to start working!</p>
+                            <p>Great news! Someone placed an order! Digital product = REAL MONIES!</p>
                             <br />
                             <a href="https://{{params.domainName}}/store_admin.php?id=orders"><button>Go to orders </button></a>
                             <br /><br />
@@ -488,7 +490,7 @@ $result2 = $client->transactionalEmails->sendTransacEmail(
                             </tr>
                             <tr></tr>
                             <tr>
-                                <td ><strong>Shipping Address</strong></td>
+                                <td ><strong>Billing</strong></td>
                             </tr>
                             <tr>
                                 <td>{{params.addressLine1}}</td>
