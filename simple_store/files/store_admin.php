@@ -855,7 +855,7 @@ if(!isset($_SESSION['cart'])){
                     //adds alert to add a variant, atlease one is required for stripe checkout        
                     if (count($products_variant) === 0) {
                                      echo '<div class="alert alert-danger" role="alert">
-                                            Please add atleast one variant (product size. Ex Small, Medium, Large)
+                                            Please add atleast one varient (product size. Ex Small, Medium, Large)
                                           </div>';
                                      
                                 } 
@@ -929,9 +929,7 @@ if(!isset($_SESSION['cart'])){
                             
                             //if there are no image, ask to upload atleast one image
                             if(count($products_images) === 0){
-                                echo '<div class="alert alert-danger" role="alert">
-                                        Please upload atleast one image
-                                      </div>';
+                                echo "Please Upload atleast one image. <br /><br />";
                             } else {
                                 //loops/shows all images
                                 foreach($products_images as $product_i){
@@ -1000,12 +998,10 @@ if(!isset($_SESSION['cart'])){
                                 
                                 // checks if there are any variants
                                 if (count($products_variant) === 0) {
-
-                                  echo "<div class='alert alert-danger' role='alert'>
-                                          You need atleast one varient for this to work... <br/><br />
-                                          <a href='?id=add_variant&product_id=".$product_info->id."' class='btn btn-light w-100' aria-label='Add variant Page'>Add a variant</a>
-                                        </div>";
-
+                                     echo "You need atleast one varient for this to work...
+                                           <br /><br />
+                                           <a href='?id=add_variant&product_id=".$product_info->id."' class='btn border rounded' aria-label='Add variant Page'>Add a variant</a>
+                                     ";
                                 } else {
                                 // loop/show all variants
                                 foreach($products_variant as $product_v){

@@ -77,7 +77,7 @@ $db->query("CREATE TABLE `simple_store_products` (
   `image4` varchar(1000) NOT NULL,
   `status` int NOT NULL,
   `sold_out` varchar(2) NOT NULL,
-  `purchase_count` varchar(1000) NOT NULL,
+  `purchase_count` varchar(1000) NOT NULL
 )");
 $db->query("ALTER TABLE `simple_store_products`
   ADD PRIMARY KEY (`id`)");
