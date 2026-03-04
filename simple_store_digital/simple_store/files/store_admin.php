@@ -74,6 +74,19 @@ if(!isset($_SESSION['cart'])){
                     <div class='payment-options'>
                       <div class='row g-4'>
                       
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=settings' aria-label='Go to Settings Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-gear'></i>
+                              </div>
+                              <h4>Store Settings</h4>
+                              <p>You can edit most store settings here.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
                         
                         <div class='col-md-6 col-lg-4 '>
                         <a href='?id=keys' aria-label='Go to Keys Page'>
@@ -84,6 +97,34 @@ if(!isset($_SESSION['cart'])){
                               </div>
                               <h4>Stripe keys</h4>
                               <p>Edit your stripe keys and edit whether you are in sandbox or live.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
+                        
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=brevo' aria-label='Go to Brevo Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-envelope'></i>
+                              </div>
+                              <h4>Brevo Settings</h4>
+                              <p>You can edit your brevo key here.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
+                        
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=catergories' aria-label='Go to Catergories Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-diagram-3'></i>
+                              </div>
+                              <h4>Catergories</h4>
+                              <p>You can view/edit/add Catergories here.</p>
                             </div>
                           </div>
                         </a>
@@ -130,48 +171,7 @@ if(!isset($_SESSION['cart'])){
                           </div>
                         </a>
                         </div>
-                        
-                        <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=catergories' aria-label='Go to Catergories Page'>
-                          <div class='payment-card '>
-                            <div class='card-content'>
-                              <div class='icon-box'>
-                                <i class='bi bi-diagram-3'></i>
-                              </div>
-                              <h4>Catergories</h4>
-                              <p>You can view/edit/add Catergories here.</p>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-                        
-                        <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=settings' aria-label='Go to Settings Page'>
-                          <div class='payment-card '>
-                            <div class='card-content'>
-                              <div class='icon-box'>
-                                <i class='bi bi-gear'></i>
-                              </div>
-                              <h4>Store Settings</h4>
-                              <p>You can edit most store settings here.</p>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-                        
-                        <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=brevo' aria-label='Go to Brevo Page'>
-                          <div class='payment-card '>
-                            <div class='card-content'>
-                              <div class='icon-box'>
-                                <i class='bi bi-envelope'></i>
-                              </div>
-                              <h4>Brevo Settings</h4>
-                              <p>You can edit your brevo key here.</p>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
+                
                         
                       </div>
                     </div>
@@ -1099,7 +1099,7 @@ if(!isset($_SESSION['cart'])){
                                   if (count($products_variant) === 0) {
                                     echo "
                                       <div class='col-lg-2'>
-                                        <a href='?id=add_variant&product_id=".$product_info->id."&post=add' class='btn border rounded' aria-label='Add variant Page'>Add a variant</a>
+                                        <a href='?id=add_variant&product_id=".$product_info->id."&post=add' class='btn border rounded' aria-label='Add varient Page'>Add a variant</a>
                                       </div>";
                                   } else {echo "<div class='col-lg-2'></div>";}
 
@@ -1286,7 +1286,7 @@ if(!isset($_SESSION['cart'])){
                               <div class='col-lg-12'>
                                 <h5>**This will only delete from local database. It will NOT DELETE from stripe account
                                     <br /><br />
-                                    Deleting variant may cause issues when customer tries to track order. 
+                                    Deleting varient may cause issues when customer tries to track order. 
                                 </h5>
                               </div>
                             </div>

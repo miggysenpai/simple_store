@@ -73,7 +73,20 @@ if(!isset($_SESSION['cart'])){
                  <section id='paymnt-methods' class='paymnt-methods section'>
                     <div class='payment-options'>
                       <div class='row g-4'>
-                      
+                        
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=settings' aria-label='Go to Settings Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-gear'></i>
+                              </div>
+                              <h4>Store Settings</h4>
+                              <p>You can edit most store settings here.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
                         
                         <div class='col-md-6 col-lg-4 '>
                         <a href='?id=keys' aria-label='Go to Keys Page'>
@@ -89,29 +102,15 @@ if(!isset($_SESSION['cart'])){
                         </a>
                         </div>
                         
-                        <div class='col-md-6 col-lg-4'>
-                        <a href='?id=products' aria-label='Go to Products Page'>
-                          <div class='payment-card '>
-                            <div class='card-content'>
-                              <div class='icon-box'>
-                                <i class='bi bi-bag-plus'></i>
-                              </div>
-                              <h4>Products</h4>
-                              <p>You can view/edit/add products and upload the pictures here.</p>
-                            </div>
-                          </div>
-                        </a>
-                        </div>
-                        
                         <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=orders' aria-label='Go to Orders Page'>
+                        <a href='?id=brevo' aria-label='Go to Brevo Page'>
                           <div class='payment-card '>
                             <div class='card-content'>
                               <div class='icon-box'>
-                                <i class='bi bi-cash-stack'></i>
+                                <i class='bi bi-envelope'></i>
                               </div>
-                              <h4>orders</h4>
-                              <p>You can view and edit the recent orders here.</p>
+                              <h4>Brevo Settings</h4>
+                              <p>You can edit your brevo key here.</p>
                             </div>
                           </div>
                         </a>
@@ -145,33 +144,34 @@ if(!isset($_SESSION['cart'])){
                         </a>
                         </div>
                         
-                        <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=settings' aria-label='Go to Settings Page'>
+                        <div class='col-md-6 col-lg-4'>
+                        <a href='?id=products' aria-label='Go to Products Page'>
                           <div class='payment-card '>
                             <div class='card-content'>
                               <div class='icon-box'>
-                                <i class='bi bi-gear'></i>
+                                <i class='bi bi-bag-plus'></i>
                               </div>
-                              <h4>Store Settings</h4>
-                              <p>You can edit most store settings here.</p>
+                              <h4>Products</h4>
+                              <p>You can view/edit/add products and upload the pictures here.</p>
                             </div>
                           </div>
                         </a>
                         </div>
                         
                         <div class='col-md-6 col-lg-4 '>
-                        <a href='?id=brevo' aria-label='Go to Brevo Page'>
+                        <a href='?id=orders' aria-label='Go to Orders Page'>
                           <div class='payment-card '>
                             <div class='card-content'>
                               <div class='icon-box'>
-                                <i class='bi bi-envelope'></i>
+                                <i class='bi bi-cash-stack'></i>
                               </div>
-                              <h4>Brevo Settings</h4>
-                              <p>You can edit your brevo key here.</p>
+                              <h4>orders</h4>
+                              <p>You can view and edit the recent orders here.</p>
                             </div>
                           </div>
                         </a>
                         </div>
+           
                         
                       </div>
                     </div>
@@ -855,7 +855,7 @@ if(!isset($_SESSION['cart'])){
                     //adds alert to add a variant, atlease one is required for stripe checkout        
                     if (count($products_variant) === 0) {
                                      echo '<div class="alert alert-danger" role="alert">
-                                            Please add atleast one variant (product size. Ex Small, Medium, Large)
+                                            Please add atleast one varient (product size. Ex Small, Medium, Large)
                                           </div>';
                                      
                                 } 
@@ -887,7 +887,7 @@ if(!isset($_SESSION['cart'])){
                                 </select>
                                 <br />
                                 ";?>
-                                <span class='text-secondary'>Price : </span><span class='text-small'>If price change, delete all variants and re-add to update with stripe</span></span><input type='text' class='form-control' id='product_price' name='product_price'  value='<?=$product_info->price?>' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  placeholder='Product Price' required></span>
+                                <span class='text-secondary'>Price : </span><span class='text-small'>If price change, delete all varients and re-add to update with stripe</span></span><input type='text' class='form-control' id='product_price' name='product_price'  value='<?=$product_info->price?>' oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"  placeholder='Product Price' required></span>
                                 <br />
                                 <span  class='text-secondary'>Color : </span>
                                       <select class='form-control' name='product_color' id='product_color'>
@@ -989,7 +989,7 @@ if(!isset($_SESSION['cart'])){
                                     <h5>Stripe Price ID</h5>
                                   </div>
                                   <div class='col-lg-2'>
-                                    <a href='?id=add_variant&product_id=".$product_info->id."' class='btn border rounded' aria-label='Add variant Page'>Add a variant</a>
+                                    <a href='?id=add_variant&product_id=".$product_info->id."' class='btn border rounded' aria-label='Add varient Page'>Add a variant</a>
                                   </div>
                                 </div>
                             </div>
@@ -998,7 +998,7 @@ if(!isset($_SESSION['cart'])){
                                 
                                 // checks if there are any variants
                                 if (count($products_variant) === 0) {
-                                     echo "You need atleast one variant for this to work...
+                                     echo "You need atleast one varient for this to work...
                                            <br /><br />
                                            <a href='?id=add_variant&product_id=".$product_info->id."' class='btn border rounded' aria-label='Add variant Page'>Add a variant</a>
                                      ";
@@ -1171,7 +1171,7 @@ if(!isset($_SESSION['cart'])){
                               <div class='col-lg-12'>
                                 <h5>**This will only delete from local database. It will NOT DELETE from stripe account
                                     <br /><br />
-                                    Deleting variant may cause issues when customer tries to track order. 
+                                    Deleting varient may cause issues when customer tries to track order. 
                                 </h5>
                               </div>
                             </div>
@@ -3359,7 +3359,7 @@ if(!isset($_SESSION['cart'])){
                         
                        
                        <form method='POST' action='?id=settings&post=confirm'>
-                        <br />
+                           <br />
                        <span class='text-secondary'>Contact Email  : </span><input type='text' class='form-control' id='contact_email' name='contact_email' value='<?=$store->contact_email?>' ></span>
                        <br />
                        <span class='text-secondary'>Facebook  : </span><input type='text' class='form-control' id='facebook' name='facebook' value='<?=$store->facebook?>' ></span>
