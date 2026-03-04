@@ -3512,6 +3512,7 @@ if(!isset($_SESSION['cart'])){
                         
                        
                        <form method='POST' action='?id=settings&post=confirm'>
+                           <br />
                        <span class='text-secondary'>Contact Email  : </span><input type='text' class='form-control' id='contact_email' name='contact_email' value='<?=$store->contact_email?>' ></span>
                        <br />
                        <span class='text-secondary'>Facebook  : </span><input type='text' class='form-control' id='facebook' name='facebook' value='<?=$store->facebook?>' ></span>
