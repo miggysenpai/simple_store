@@ -2158,14 +2158,14 @@ if(!isset($_SESSION['cart'])){
                   echo "
                      <div class='container'>
                         <div class='row gy-4'>
-                          <div class='col-md-4'>
+                          <div class='col-md-6'>
                               <a href='?id=search_order' aria-label='Search for an order'><button type='button' class='btn btn-secondary w-100'>Search Orders</button></a>
                           </div>
-                          <div class='col-md-4'>
+                          <div class='col-md-6'>
                               <a href='?id=orders_view_all' aria-label='Go to View Order Page'><button type='button' class='btn text-bg-secondary w-100'>View All Orders</button></a>
                           </div>
                           
-                          <div class='col-md-4 dropdown'>
+                          <div class='col-md-4 dropdown d-none'>
                             <button class='btn btn-secondary dropdown-toggle w-100' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                               Sort By
                             </button>
@@ -2198,13 +2198,13 @@ if(!isset($_SESSION['cart'])){
                           <div class='col-lg-4'>
                             <h5>Email</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-3 '>
                             <h5>Total</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-2 d-none'>
                             <h5>Status</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-3 '>
                             <h5>View</h5>
                           </div>
                         </div>
@@ -2227,10 +2227,10 @@ if(!isset($_SESSION['cart'])){
                           <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                             <span class='text-secondary'>Email : </span><span><?=$t->customer_email?></span>
                           </div>
-                          <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                          <div class="col-lg-3 col-12 mb-3 mb-lg-0">
                             <span class='text-secondary'>Total : </span><span>$<?=$t->amount_total/100?></span>
                           </div>
-                          <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                          <div class="col-lg-2 col-12 mb-3 mb-lg-0 d-none">
                             <span class='text-secondary'>Status : </span><span>
                                 <?php if($t->status == "1"){echo "Order Confirmed";}?>
                                 <?php if($t->status == "2"){echo "Processing";}?>
@@ -2238,7 +2238,7 @@ if(!isset($_SESSION['cart'])){
                                 <?php if($t->status == "4"){echo "In Transit";}?>
                                 <?php if($t->status == "5"){echo "Delivered";}?></span>
                           </div>
-                           <div class="col-12 col-lg-2">
+                           <div class="col-12 col-lg-3">
                               <a href="?id=edit_order&order_id=<?=$t->id?>" aria-label='Go to View Order Page'><button type='button' class='btn text-bg-secondary'>View Order</button></a>
                           </div>
                         </div>
@@ -2310,13 +2310,13 @@ if(!isset($_SESSION['cart'])){
                                           <div class='col-lg-4'>
                                             <h5>Email</h5>
                                           </div>
-                                          <div class='col-lg-2 '>
+                                          <div class='col-lg-3 '>
                                             <h5>Total</h5>
                                           </div>
-                                          <div class='col-lg-2 '>
+                                          <div class='col-lg-2 d-none'>
                                             <h5>Status</h5>
                                           </div>
-                                          <div class='col-lg-2 '>
+                                          <div class='col-lg-3 '>
                                             <h5>View</h5>
                                           </div>
                                         </div>
@@ -2335,10 +2335,10 @@ if(!isset($_SESSION['cart'])){
                                                   <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                                                     <span class='text-secondary'>Email : </span><span><?=$t->customer_email?></span>
                                                   </div>
-                                                  <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                                                  <div class="col-lg-3 col-12 mb-3 mb-lg-0">
                                                     <span class='text-secondary'>Total : </span><span>$<?=$t->amount_total/100?></span>
                                                   </div>
-                                                  <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                                                  <div class="col-lg-2 col-12 mb-3 mb-lg-0 d-none">
                                                     <span class='text-secondary'>Status : </span><span>
                                                         <?php if($t->status == "1"){echo "Order Confirmed";}?>
                                                         <?php if($t->status == "2"){echo "Processing";}?>
@@ -2346,7 +2346,7 @@ if(!isset($_SESSION['cart'])){
                                                         <?php if($t->status == "4"){echo "In Transit";}?>
                                                         <?php if($t->status == "5"){echo "Delivered";}?></span>
                                                   </div>
-                                                   <div class="col-12 col-lg-2">
+                                                   <div class="col-12 col-lg-3">
                                                       <a href="?id=edit_order&order_id=<?=$t->id?>" aria-label='Go to View Order Page'><button type='button' class='btn text-bg-secondary'>View Order</button></a>
                                                   </div>
                                                 </div>
@@ -2389,14 +2389,14 @@ if(!isset($_SESSION['cart'])){
                   echo "
                     <div class='container'>
                       <div class='row gy-4'>
-                        <div class='col-md-4'>
+                        <div class='col-md-6'>
                             <a href='?id=search_order' aria-label='Search for an order'><button type='button' class='btn btn-secondary w-100'>Search Orders</button></a>
                         </div>
-                        <div class='col-md-4'>
+                        <div class='col-md-6'>
                             <a href='?id=orders_view_all' aria-label='Go to View Order Page'><button type='button' class='btn text-bg-secondary w-100'>View All Orders</button></a>
                         </div>
                         
-                        <div class='col-md-4 dropdown'>
+                        <div class='col-md-4 dropdown d-none'>
                           <button class='btn btn-secondary dropdown-toggle w-100' type='button' data-bs-toggle='dropdown' aria-expanded='false'>
                             Sort By
                           </button>
@@ -2429,13 +2429,13 @@ if(!isset($_SESSION['cart'])){
                           <div class='col-lg-4'>
                             <h5>Email</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-3 '>
                             <h5>Total</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-2 d-none'>
                             <h5>Status</h5>
                           </div>
-                          <div class='col-lg-2 '>
+                          <div class='col-lg-3 '>
                             <h5>View</h5>
                           </div>
                         </div>
@@ -2458,10 +2458,10 @@ if(!isset($_SESSION['cart'])){
                           <div class="col-lg-4 col-12 mb-3 mb-lg-0">
                             <span class='text-secondary'>Email : </span><span><?=$t->customer_email?></span>
                           </div>
-                          <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                          <div class="col-lg-3 col-12 mb-3 mb-lg-0">
                             <span class='text-secondary'>Total : </span><span>$<?=$t->amount_total/100?></span>
                           </div>
-                          <div class="col-lg-2 col-12 mb-3 mb-lg-0">
+                          <div class="col-lg-2 col-12 mb-3 mb-lg-0 d-none">
                             <span class='text-secondary'>Status : </span><span>
                                 <?php if($t->status == "1"){echo "Order Confirmed";}?>
                                 <?php if($t->status == "2"){echo "Processing";}?>
@@ -2469,7 +2469,7 @@ if(!isset($_SESSION['cart'])){
                                 <?php if($t->status == "4"){echo "In Transit";}?>
                                 <?php if($t->status == "5"){echo "Delivered";}?></span>
                           </div>
-                           <div class="col-12 col-lg-2">
+                           <div class="col-12 col-lg-3">
                               <a href="?id=edit_order&order_id=<?=$t->id?>" aria-label='Go to View Order Page'><button type='button' class='btn text-bg-secondary'>View Order</button></a>
                           </div>
                         </div>
@@ -2884,10 +2884,10 @@ if(!isset($_SESSION['cart'])){
                                 <br />
                                 <span class='text-secondary'>Created  : </span><input type='text' class='form-control' id='created' name='created' value='".$created."' disabled>
                                 <br />
-                                <span class='text-secondary'>Status  : </span><input type='text' class='form-control' id='status' name='status' value='".$order_status."' disabled>
-                                <br />
-                                <a href='?id=next_status&order_id=".$_GET["order_id"]."' class='btn btn-success' aria-label='Change Order to next status'>Change to next status </a>
-                                <br /><br />
+                                <span class='text-secondary d-none'>Status  : </span><input type='text' class='form-control d-none' id='status' name='status' value='".$order_status."' disabled>
+                                
+                                <a href='?id=next_status&order_id=".$_GET["order_id"]."' class='btn btn-success d-none' aria-label='Change Order to next status'>Change to next status </a>
+                                
                                 <span class='text-secondary'>Customer Email  : </span><input type='text' class='form-control' id='customer_email' name='customer_email' value='".$order_info->customer_email."' disabled>
                                 <br />
                                 <span class='text-secondary'>Customer Name  : </span><input type='text' class='form-control' id='customer_name' name='customer_name' value='".$order_info->customer_name."' disabled>
@@ -2900,15 +2900,14 @@ if(!isset($_SESSION['cart'])){
                                 <br />
                                 <span class='text-secondary'>Payment Exp  : </span><input type='text' class='form-control' id='payment_exp' name='payment_exp' value='".$order_info->payment_exp_month." / ".$order_info->payment_exp_year."' disabled>
                                 <br />
-                                <span class='text-secondary'>Shipping Carrier  : </span><input type='text' class='form-control' id='shipping_carrier' name='shipping_carrier' value='".$order_info->shipping_carrier."' disabled>
-                                <br />
-                                <span class='text-secondary'>Shipping Tracking  : </span><input type='text' class='form-control' id='shipping_tracking' name='shipping_tracking' value='".$order_info->shipping_tracking."' disabled>
-                                <br />
-                                <a href='?id=shipping_update&order_id=".$_GET["order_id"]."' class='btn btn-success' aria-label='Go to Update Shipping information Page'>Update Shipping information </a>
-                                <br /><br />
+                                <span class='text-secondary d-none'>Shipping Carrier  : </span><input type='text' class='form-control d-none' id='shipping_carrier' name='shipping_carrier' value='".$order_info->shipping_carrier."' disabled>
+                                
+                                <span class='text-secondary d-none'>Shipping Tracking  : </span><input type='text' class='form-control d-none' id='shipping_tracking' name='shipping_tracking' value='".$order_info->shipping_tracking."' disabled>
+                                
+                                <a href='?id=shipping_update&order_id=".$_GET["order_id"]."' class='btn btn-success d-none' aria-label='Go to Update Shipping information Page'>Update Shipping information </a>
+                                
                                 <a href='?id=view_ordered&order_id=".$_GET["order_id"]."' class='btn btn-success' aria-label='Go to View ordered items Page'>View ordered items</a>
-                                <br />
-                                <br /><br />
+                                
                               </form>
                               </div>
                             </div>
@@ -3354,28 +3353,15 @@ if(!isset($_SESSION['cart'])){
             $store = $db->query("SELECT * FROM simple_store_settings")->first(); // get store settings
             $order_info = $db->query("SELECT * FROM simple_store_stripe_transactions WHERE id = ?",[$_GET["order_id"]])->first(); // get order info
             ?>
-            <div class='order-confirmation-1'>
-              <div class='next-steps  p-4'  >
+            
                 <h3 class='text-center'>Ordered Items</h3>
-                
-                 <section id='cart' class='cart section'>
-                  <div class='container' >
+                <div class='container order-confirmation' >
                   <a class='btn btn-secondary' href='?id=edit_order&order_id=<?=$_GET["order_id"]?>' aria-label='Go Back to order'>Back to order</a> <br/><br/>
-                  <div class='row g-4'>
+                  <div class='row g-4 main-content'>
                   <div class='col-lg-12' >
-                    <div class='cart-items'>
-                      <div class='cart-header d-none d-lg-block'>
-                        <div class='row align-items-center gy-4'>
-                          <div class='col-lg-12'>
-                            <h5>Ordered Items</h5>
-                          </div>
-                        </div>
-                      </div>
-                                  
-                        <div class="order-confirmation">
-                          <div class="order-summary mb-4" >
-                                <h4>Order Summary</h4>
-                                <div class="order-items mt-3">
+                    
+                  <div class="details-card">
+                        
                         
                         <form method="post" action="pdf.php">
                         <input class="d-none" type="text"  name="site_name" value="<?=$_SERVER['SERVER_NAME']?>" hidden>
@@ -3388,6 +3374,7 @@ if(!isset($_SESSION['cart'])){
                         <input class="d-none" type="text"  name="customer_email" value="<?=$order_info->customer_email?>" hidden>
                         <input class="d-none" type="text"  name="customer_address_1" value="<?=$order_info->address_line1?> <?=$order_info->address_line2?>," hidden>
                         <input class="d-none" type="text"  name="customer_address_2" value="<?=$order_info->address_city?> <?=$order_info->address_state?> <?=$order_info->address_postal_code?>" hidden>
+                        <div class="card-body">
                         <?php 
                         
                         $items = $db->query("SELECT * FROM simple_store_transactions_item WHERE checkout_session_id = ? ", [$order_info->session_id])->results(); 
@@ -3400,24 +3387,29 @@ if(!isset($_SESSION['cart'])){
                             $product_img = $db->query("SELECT * FROM simple_store_products_images WHERE product_id = ? AND is_primary = ?",[$product_local->id, "1"])->first(); // get product info
                             
                          ?>        
-                        
-                          <div class="item-row d-flex">
-                            <div class="item-image">
-                              <img src="<?=$product_img->image?>" alt="Product" class="img-fluid" loading="lazy">
-                            </div>
-                            <div class="item-details">
-                              <h5><?=$product_local->name?></h5>
-                              <p class="text-muted">Color: <?=$product_local->color?> / Size: <?=$product_local_variant->size?></p>
-                              <div class="quantity-price d-flex justify-content-between">
-                                <span>Qty: <?=$productInfo->qty?></span>
-                                
-                                <input class="d-none" type="text"  name="product[<?=$prod_array?>][name]"  value="<?=$product_local->name?>" hidden>
-                                <input class="d-none" type="text" name="product[<?=$prod_array?>][quanity]"  value="<?=$productInfo->qty?>" hidden>
-                                 <?php $prod_array = $prod_array + 1; ?>
-                                
+                         
+                         <div class="item">
+                              <div class="item-image">
+                                <img src="<?=$product_img->image?>" alt="Product" loading="lazy">
+                              </div>
+                              <div class="item-details">
+                                <h4><?=$product_local->name?></h4>
+                                <div class="item-meta">
+                                  <span class="d-none">Color: <?=$product_local->color?></span>
+                                  <span>Type: <?=$product_local_variant->size?></span>
+                                </div>
+                                <div class="item-price">
+                                  <span class="quantity"><?=$productInfo->qty?> ×</span>
+                                  <span class="price">$ <?=$product_local->price?></span>
+                                </div>
                               </div>
                             </div>
-                          </div>
+                            
+                        <input class="d-none" type="text"  name="product[<?=$prod_array?>][name]"  value="<?=$product_local->name?>" hidden>
+                        <input class="d-none" type="text" name="product[<?=$prod_array?>][quanity]"  value="<?=$productInfo->qty?>" hidden>
+                        <?php $prod_array = $prod_array + 1; ?>    
+                        
+                          
                       <?php } ?>
                       <br />
                       <button type="submit" class="btn border rounded">View Ordered in PDF</button>
