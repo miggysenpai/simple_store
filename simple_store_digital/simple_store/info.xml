@@ -1,0 +1,25 @@
+<?xml version="1.2" encoding="UTF-8"?>
+<plugin>
+  <name>Simple Store - Apparel Plugin</name>
+  <author>miggysempai</author>
+<!-- Feel free to include your github repo here -->
+  <website>https://www.userspice.com</website>
+
+<!-- the version of the plugin iteself -->
+  <version>1.0.4</version>
+
+<!-- release date of THIS version -->
+  <release>Feb 19, 2026</release>
+
+<!-- the last version of UserSpice you tested the plugin with -->
+  <tested>5.7.7</tested>
+
+<!-- you can specify your icon in the userspice menu, but note wider icons look weird  -->
+  <fa_icon>fa fa-plug</fa_icon>
+
+<!-- What does your plugin do? -->
+  <description>Simple clothing store with stripe payments and brevo mail.</description>
+
+  <!-- This is the launch button in the plugin manager. If it is blank or missing, Configure Plugin will show up. -->
+    <button>Simple Store - Apparel</button>
+</plugin>
