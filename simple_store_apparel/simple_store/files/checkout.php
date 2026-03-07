@@ -48,6 +48,12 @@ if($stripe_key_check->is_live == 1){
     $stripeSecretKey = $stripe_key_check->sandbox_secret;
 }
 
+if($stripe_key_check->stripe_coupons == 1){
+    $stripe_coupon = "true";
+} else {
+    $stripe_coupon = "false";
+}
+
 //Stripe checkout code
 \Stripe\Stripe::setApiKey($stripeSecretKey);
 header('Content-Type: application/json');
@@ -62,6 +68,8 @@ $checkout_session = \Stripe\Checkout\Session::create([ // more settings availabl
   'automatic_tax' => [
     'enabled' => true,
   ],
+  'currency' => $stripe_key_check->currency,
+  'allow_promotion_codes' => $stripe_coupon,
 ]);
 
 header("HTTP/1.1 303 See Other");

@@ -114,7 +114,9 @@ $db->query("CREATE TABLE `simple_store_products_variants` (
   `product_id` varchar(1000) NOT NULL,
   `size` varchar(1000) NOT NULL,
   `prod_id` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `price_id` varchar(1000) NOT NULL
+  `price_id` varchar(1000) NOT NULL,
+  `qoh` varchar(1000) NOT NULL,
+  `qoh_unlimited` int(2) NOT NULL
 )");
 $db->query("ALTER TABLE `simple_store_products_variants`
   ADD PRIMARY KEY (`id`)");
@@ -148,10 +150,12 @@ $db->query("CREATE TABLE `simple_store_stripe_keys` (
   `sandbox_public` varchar(1000) NOT NULL,
   `sandbox_secret` varchar(1000) NOT NULL,
   `webhook` varchar(1000) NOT NULL,
-  `is_live` int NOT NULL
+  `is_live` int NOT NULL,
+  `stripe_currency` varchar(3) NOT NULL,
+  `stripe_coupons` int(3) NOT NULL
 )");
-$db->query("INSERT INTO `simple_store_stripe_keys` (`id`, `live_public`, `live_secret`, `sandbox_public`, `sandbox_secret`, `webhook`, `is_live`) VALUES
-(1, '', '', '', '', '', 0);");
+$db->query("INSERT INTO `simple_store_stripe_keys` (`id`, `live_public`, `live_secret`, `sandbox_public`, `sandbox_secret`, `webhook`, `is_live`, `stripe_currency`, `stripe_coupons`) VALUES
+(1, '', '', '', '', '', 0, 'usd' , 0);");
 $db->query("ALTER TABLE `simple_store_stripe_keys`
   ADD PRIMARY KEY (`id`)");
 $db->query("ALTER TABLE `simple_store_stripe_keys`

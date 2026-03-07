@@ -95,7 +95,7 @@ if(!isset($_SESSION['cart'])){
                               <div class='icon-box'>
                                 <i class='bi bi-key'></i>
                               </div>
-                              <h4>Stripe keys</h4>
+                              <h4>Stripe Settings</h4>
                               <p>Edit your stripe keys and edit whether you are in sandbox or live.</p>
                             </div>
                           </div>
@@ -191,6 +191,8 @@ if(!isset($_SESSION['cart'])){
                 $post_sandbox_public = $_POST["sandbox_public"];
                 $post_sandbox_secret = $_POST["sandbox_secret"];
                 $post_webhook = $_POST["webhook"];
+                $post_currency = $_POST["currency"];
+                $post_coupons = $_POST["coupons"];
                 
                 //fields for db
                 $fields = [
@@ -199,6 +201,8 @@ if(!isset($_SESSION['cart'])){
                     'sandbox_public' => $post_sandbox_public,
                     'sandbox_secret' => $post_sandbox_secret,
                     'webhook' => $post_webhook,
+                    'stripe_currency' => $post_currency,
+                    'stripe_coupons' => $post_coupons,
                 ];
                 //update db
                 $result = $db->update('simple_store_stripe_keys', 1, $fields);
@@ -320,6 +324,29 @@ if(!isset($_SESSION['cart'])){
                             <div class='card-content'>
                               <label for='webhook' class='form-label text-secondary'>Webhook Key</label>
                                 <input type='text' class='form-control' id='webhook' name='webhook' value='".$stripe_key_check->webhook."' required>
+                                <br />
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class='col-md-12 col-lg-12'>
+                          <div class='payment-card'>
+                            <div class='card-content'>
+                              <label for='currency' class='form-label text-secondary'>Stripe currency (Default : usd)</label>
+                                <input type='text' class='form-control' id='currency' name='currency' value='".$stripe_key_check->stripe_currency."' required>
+                                <br />
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div class='col-md-12 col-lg-12'>
+                          <div class='payment-card'>
+                            <div class='card-content'>
+                              <label for='coupons' class='form-label text-secondary'>Allow Stripe Coupons</label>
+                                <select class='form-select' id='coupons' name='coupons' >
+                                    <option value='1' "; if($stripe_key_check->stripe_coupons == 1){echo "selected";} echo">Yes</option>
+                                    <option value='0'"; if($stripe_key_check->stripe_coupons == 0){echo "selected";} echo" >No</option>
+                                </select>
                                 <br />
                             </div>
                           </div>
