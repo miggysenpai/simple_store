@@ -68,7 +68,7 @@ $checkout_session = \Stripe\Checkout\Session::create([ // more settings availabl
   'automatic_tax' => [
     'enabled' => true,
   ],
-  'currency' => $stripe_key_check->currency,
+  'currency' => $stripe_key_check->stripe_currency,
   'allow_promotion_codes' => $stripe_coupon,
 ]);
 

@@ -1095,7 +1095,7 @@ if(!isset($_SESSION['cart'])){
                   'tax_code' => "txcd_99999999", // you may have to update this for your specific needs
                   'default_price_data' => [
                     'unit_amount' => $product_info->price*100,
-                    'currency' => 'usd', // you may have to update this based on your needs
+                    'currency' => $stripe_key_check->stripe_currency, // you may have to update this based on your needs
                   ],
                   'expand' => ['default_price'],
                 ]);
