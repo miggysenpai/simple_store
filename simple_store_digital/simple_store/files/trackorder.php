@@ -13,8 +13,13 @@ if(!isset($_SESSION['cart'])){
     <section id="order-confirmation" class="order-confirmation section">
       <div class="container " style="min-height: 60vh;">
            <?php
+           $post = 0;
+           if(isset($_GET['order_number']) && isset($_GET['order_email']) ){$post = 1;}
+           if(!$_POST ){$post = 1;}
+         
+
            // order tracking form
-           if(!$_POST){?>  
+           if($post == 0){?>  
                     <br /><br /><br /><br />
                     <div class="settings-section text-center" data-aos="fade-up" >
                       <h3>Order Tracking</h3>
@@ -47,7 +52,7 @@ if(!isset($_SESSION['cart'])){
     <?php }
     
     // check if post 
-    if(!empty($_POST)){
+    if($post == 1){
         $post_order = Input::get('order_number');
         $post_email = Input::get('order_email');
         if(isset($post_order) && isset($post_email)) {

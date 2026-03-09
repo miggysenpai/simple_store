@@ -1,3 +1,12 @@
+<?php
+// create cart session if one isnt available
+session_start(); 
+if(!isset($_SESSION['cart'])){
+   $_SESSION['cart'] = [];
+} 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +68,7 @@
           </a>
 
           <!-- Search -->
-          <form class="search-form desktop-search-form" action="search.php" method="POST">
+          <form class="search-form desktop-search-form" action="<?php echo $us_url_root. 'search.php'; ?>" method="POST">
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search for products" name="search">
               <button class="btn" type="submit">
@@ -75,9 +84,63 @@
             <button class="header-action-btn mobile-search-toggle d-xl-none" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSearch" aria-expanded="false" aria-controls="mobileSearch">
               <i class="bi bi-search"></i>
             </button>
+            
+            <?php
+            if ($settings->registration == 1) { ?>
+            <!-- Account -->
+            <div class="dropdown account-dropdown">
+              <button class="header-action-btn" data-bs-toggle="dropdown">
+                <i class="bi bi-person"></i>
+              </button>
+              <div class="dropdown-menu">
+                <div class="dropdown-header">
+                  <h6>Welcome to <span class="sitename"><?php echo $settings->site_name;?></span></h6>
+                  <p class="mb-0">Access account &amp; view orders</p>
+                </div>
+                <?php if(isUserLoggedIn()) {?>
+                    <div class="dropdown-body">
+                      <a class="dropdown-item d-flex align-items-center" href="<?php echo $us_url_root. 'usersc/account.php'; ?>">
+                        <i class="bi bi-person-circle me-2"></i>
+                        <span>My Profile</span>
+                      </a>
+                      <a class="dropdown-item d-flex align-items-center" href="<?php echo $us_url_root. 'usersc/user_settings.php'; ?>">
+                        <i class="bi bi-gear me-2"></i>
+                        <span>Settings</span>
+                      </a>
+                    
+                    <?php if(isAdmin()){?>
+                        <hr />
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo $us_url_root. 'users/admin.php'; ?>">
+                            <i class="bi bi-person-gear me-2"></i>
+                            <span>Admin</span>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="<?php echo $us_url_root. 'store_admin.php'; ?>">
+                            <i class="bi bi-shop me-2"></i>
+                            <span>Store Admin</span>
+                        </a>
+                    <?php } ?>
+                    </div>
+                    <div class="dropdown-footer">
+                      <a href="<?php echo $us_url_root. 'users/logout.php'; ?>" class="btn btn-outline-primary w-100">Logout</a>
+                    </div>
+                    
+                <?php } else { ?>
+                <div class="dropdown-footer">
+                  <a href="<?php echo $us_url_root. 'users/login.php'; ?>" class="btn btn-primary w-100 mb-2">Sign In</a>
+                  <a href="<?php echo $us_url_root. 'users/join.php'; ?>" class="btn btn-outline-primary w-100">Register</a>
+                </div>
+                <?php } ?>
+              </div>
+            </div>
+            
+            
+            
+            <?php } ?>
+            
+            
 
             <!-- Cart -->
-            <a href="cart.php" class="header-action-btn">
+            <a href="<?php echo $us_url_root. 'cart.php'; ?>" class="header-action-btn">
               <i class="bi bi-cart3"></i>
               <span class="badge">
                 <?php 
