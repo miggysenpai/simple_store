@@ -488,7 +488,7 @@ $orders_count = count($orders_search);
 
                    
 
-                    <!-- Delete Account -->
+                    <!-- Delete Account 
                     <div class="settings-section danger-zone" data-aos="fade-up" data-aos-delay="300">
                       <h3>Delete Account</h3>
                       <div class="danger-zone-content">
@@ -496,6 +496,7 @@ $orders_count = count($orders_search);
                         <button type="button" class="btn-danger">Delete Account</button>
                       </div>
                     </div>
+                    -->
                   </div>
                 </div>
               </div>

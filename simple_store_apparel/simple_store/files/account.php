@@ -79,7 +79,7 @@ if ($hooks['bottom'] == []) { //no plugin hooks present
 
 
 <!-- Account Section -->
-    <section id="account" class="account section "  style="min-height: 68vh;">
+    <section id="account" class="account section"  style="min-height: 68vh;">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -231,11 +231,13 @@ if ($hooks['bottom'] == []) { //no plugin hooks present
                         <div class="product-grid">
                             
                             <?php
+                            $prod_c = 0;
+                            $total_qty = 0;
                             foreach($items as $productInfo){
                             $product_local_variant = $db->query("SELECT * FROM simple_store_products_variants WHERE price_id = ?",[$productInfo->price_id])->first(); // get variant info (size)
                             $product_local = $db->query("SELECT * FROM simple_store_products WHERE id = ?",[$product_local_variant->product_id])->first(); // get product info
                             $product_img = $db->query("SELECT * FROM simple_store_products_images WHERE product_id = ? AND is_primary = ?",[$product_local->id, "1"])->first(); // get primary image
-                            $prod_c = 0;
+                            
                                 if($prod_c < 3){
                                     echo '<img src="../'.$product_img->image.'" alt="Product" loading="lazy">';
                                     $prod_c++;
