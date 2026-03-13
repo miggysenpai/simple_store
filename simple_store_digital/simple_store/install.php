@@ -282,6 +282,17 @@ rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/webhook.
         rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/login.php' , $abs_us_root . $us_url_root ."usersc/login.php");
     }
 
+//****User Files
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/account.php' , $abs_us_root . $us_url_root ."/usersc/account.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/complete.php' , $abs_us_root . $us_url_root ."/usersc/complete.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/forgot_password.php' , $abs_us_root . $us_url_root ."/usersc/forgot_password.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/forgot_password_reset.php' , $abs_us_root . $us_url_root ."/usersc/forgot_password_reset.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/join.php' , $abs_us_root . $us_url_root ."/usersc/join.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/user_settings.php' , $abs_us_root . $us_url_root ."/usersc/user_settings.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/verify.php' , $abs_us_root . $us_url_root ."/usersc/verify.php");
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/verify_resend.php' , $abs_us_root . $us_url_root ."/usersc/verify_resend.php");
+
+
 //****Downloads
 
 //create downloads folder if does not exist    
