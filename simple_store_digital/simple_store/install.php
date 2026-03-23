@@ -47,6 +47,21 @@ $db->query("ALTER TABLE `simple_store_brevo`
 $db->query("ALTER TABLE `simple_store_brevo`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
 
+//Creates simple_store_expenses
+$db->query("CREATE TABLE `simple_store_expenses` (
+  `id` int NOT NULL,
+  `name` varchar(500) NOT NULL,
+  `cost` varchar(500) NOT NULL,
+  `file` varchar(1000) NOT NULL,
+  `include_total` varchar(2) NOT NULL
+)");
+
+$db->query("ALTER TABLE `simple_store_expenses`
+  ADD PRIMARY KEY (`id`)");
+  
+$db->query("ALTER TABLE `simple_store_expenses`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2");
+
 
 //Creates simple_store_catergories
 $db->query("CREATE TABLE `simple_store_catergories` (
@@ -301,6 +316,13 @@ if (!file_exists($abs_us_root . $us_url_root . 'downloads')) {
 }    
 //move downloads file
 rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/downloads.php' , $abs_us_root . $us_url_root ."downloads/index.php");
+
+//move expenses file
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/files/expenses.php' , $abs_us_root . $us_url_root ."downloads/expenses.php");
+
+//Update htacess file
+rename($abs_us_root . $us_url_root . 'usersc/plugins/simple_store/downloads/htaccess' , $abs_us_root . $us_url_root . 'usersc/plugins/simple_store/downloads/.htaccess');
+
 
 
 //The format is $hooks['userspicepage.php']['position'] = path to filename to include

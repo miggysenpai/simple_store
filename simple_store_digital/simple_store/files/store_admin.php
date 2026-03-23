@@ -171,6 +171,34 @@ if(!isset($_SESSION['cart'])){
                           </div>
                         </a>
                         </div>
+
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=expenses' aria-label='Go to Expenses Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-wallet2'></i>
+                              </div>
+                              <h4>Expenses</h4>
+                              <p>You can add your operating costs here.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
+                        
+                        <div class='col-md-6 col-lg-4 '>
+                        <a href='?id=stats' aria-label='Go to Stats Page'>
+                          <div class='payment-card '>
+                            <div class='card-content'>
+                              <div class='icon-box'>
+                                <i class='bi bi-clipboard-data'></i>
+                              </div>
+                              <h4>Fun stats</h4>
+                              <p>You can view fun stats on any sales.</p>
+                            </div>
+                          </div>
+                        </a>
+                        </div>
                 
                         
                       </div>
