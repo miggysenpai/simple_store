@@ -208,6 +208,582 @@ if(!isset($_SESSION['cart'])){
             ";
         }
         
+//*****EXPENSES PAGE
+        if($page_id == "expenses"){  ?>
+        <div class='order-confirmation-1'>
+              <div class='next-steps  p-4'  >
+                <h3 class='text-center'>Operation Cost</h3>
+                
+                 <section id='cart' class='cart section'>
+                  <div class='container' >
+                  <div class='row g-4'>
+                  <div class='col-lg-12'>
+                      <a class='btn btn-secondary float-start' href='store_admin.php' aria-label='Go to Store Admin Page'>Back to Store Admin</a> 
+                      <a class='btn rounded border float-end' href='?id=add_expense' aria-label='Go to Add Expense Page'>Add Expense</a></div>
+                  <div class='col-lg-12' >
+                  
+                  <br />
+                  
+                    <div class='cart-items'>
+                      <div class='cart-header d-none d-lg-block'>
+                        <div class='row align-items-center gy-4'>
+                          <div class='col-lg-6'>
+                            <h5>Name</h5>
+                          </div>
+                          
+                          <div class='col-lg-2 '>
+                            <h5>Cost</h5>
+                          </div>
+                          <div class='col-lg-2 '>
+                            <h5>File</h5>
+                          </div>
+                          <div class='col-lg-2 '>
+                            <h5>Edit</h5>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    <?php  
+                    //gets all products  
+                    $expenses = $db->query("SELECT * FROM simple_store_expenses")->results(); 
+                     $expense_total_count = 0;
+                    // if there are no products, show this
+                    if (count($expenses) === 0) {
+                         echo "You need atleast one expense for this to work...
+                               <br /><br />
+                            <a href='?id=add_expense' class='btn border rounded' aria-label='Go to Add Expense'>Add an Expense</a>
+                         ";
+                    } else {
+                    
+                    // if there are products, do a simple loop to display all products
+                   
+                    foreach($expenses as $p) {?> 
+                              <div class="cart-item" >
+                                <div class="row align-items-center gy-4">
+                                  <div class="col-lg-6 col-12 mb-3 mb-lg-0">
+                                      <span class='text-secondary'>Name  : </span><span><?=$p->name?></span>
+                                  </div>
+                                  <div class="col-12 col-lg-2 ">
+                                      <span class='text-secondary'>Cost : </span><span>$ <?=$p->cost?></span>
+                                  </div>
+                                  <div class="col-12 col-lg-2 ">
+                                      <?php 
+                                        if($p->file == ""){
+                                            echo "<span class='alert alert-danger'> No File </span>";
+                                        } else {
+                                            echo "<a class='btn btn-secondary' href='downloads/expenses.php?id=".$p->id."'>Download</a>";
+                                        }
+                                      ?>
+                                  </div>
+                                  <div class="col-12 col-lg-2">
+                                      <a href="?id=edit_expense&expense_id=<?=$p->id?>" aria-label='Go to Edit Expense Page' ><button type='button' class='btn text-bg-secondary'>Edit Expense</button></a>
+                                  </div>
+                                </div>
+                              </div><!-- End Cart Item -->
+                
+                    <?php $expense_total_count = $expense_total_count + $p->cost; }
+                        
+                    } 
+                    echo '
+                            <div class="cart-item" >
+                                <div class="row align-items-center gy-4">
+                                  <div class="col-lg-10 col-12 mb-3 mb-lg-0">
+                                  </div>
+                                  
+                                  <div class="col-12 col-lg-2 ">
+                                      <span> Total : $ '.number_format((float)$expense_total_count, 2, '.', '') .'
+                                  </div>
+                                </div>
+                              </div><!-- End Cart Item -->
+                    ';
+                     echo "  </div></div></div></div></div></div> "; 
+            
+            
+        }   
+        
+//*****ADD EXPENSE PAGE
+        if($page_id == "add_expense"){  
+            $add_confirm = "";   
+             
+             //checks if there is a form post
+             if(isset($_GET["post"])){
+                $add_confirm = $_GET["post"];   
+             }
+             
+            //if post form is add
+             if($add_confirm == "add"){
+                // prepare fields for database
+                $fields = [
+                    'name' => $_POST['expense_name'],
+                    'cost' => $_POST['expense_cost'],
+                    'include_total' => $_POST['include_total'],
+                ];
+                $result = $db->insert('simple_store_expenses', $fields); // add to database
+                $last_id = $db->lastId(); // gets lastId for new product redirect
+                header("Location: store_admin.php?id=edit_expense&expense_id=".$last_id); // redirect to edit expense page
+                die();
+             }
+            
+            echo "
+            <div class='order-confirmation-1'>
+              <div class='next-steps  p-4'  >
+                <h3 class='text-center'>Add Expense</h3>
+                
+                 <section id='cart' class='cart section'>
+                  <div class='container' >
+                  <a class='btn btn-secondary' href='store_admin.php' aria-label='Go to Store Admin Page'>Back to Store Admin</a>
+                  <a class='btn btn-secondary' href='store_admin.php?id=expenses' aria-label='Go to Expenses Page'>Back to Expenses </a>
+                  <br/><br/>
+                  <div class='row g-4'>
+                  <div class='col-lg-12' >
+                    <div class='cart-items'>
+                      <div class='cart-header d-none d-lg-block'>
+                        <div class='row align-items-center gy-4'>
+                          <div class='col-lg-12'>
+                            <h5>Expense</h5>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class='cart-item' >
+                        <div class='row'>
+                          <div class='col-lg-12 col-12'>
+                            <div class='product-info d-flex '>
+                              <div class='product-details'>
+                              <form method='POST' action='?id=add_expense&post=add'>
+                                <span class='text-secondary'>Expense Name  : </span><input type='text' class='form-control' id='expense_name' name='expense_name' required></span>
+                                <br />
+                                <span class='text-secondary'>Expense Cost : </span><input type='text' class='form-control' id='expense_cost' name='expense_cost'  required></span>
+                                <br />
+                                <span class='text-secondary'>Include in total count : </span>
+                                    <select class='form-select' id='include_total' name='include_total' required>
+                                        <option value='1'> Yes </option>
+                                        <option value='0'> No </option>
+                                    </select>
+                                <br /><br /><br />
+                                <button type='submit' name='prod_details_form' value='prod_details_form' class='btn btn-success border rounded'>Add Expense</button>
+                                <br /><br />
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div></div></div></div></div></div></div>";
+        }
+        
+//***** EDIT EXPENSE PAGE 
+        if($page_id == "edit_expense"){
+            
+            //checks for product id, if one not available, redirect to home
+            if(!isset($_GET["expense_id"])){
+                header("Location: store_admin.php?id=expenses");
+                die();
+            }
+            
+            //checks if form post
+            if($_POST){ 
+                $post_type = $_GET["post"]; // sets post type
+                
+                //post general info
+                if($post_type == "general"){
+                    //sets all fields
+                    $fields = [
+                    'name' => $_POST['expense_name'],
+                    'cost' => $_POST['expense_cost'],
+                    'include_total' => $_POST['include_total']
+                    ];
+                $result = $db->update('simple_store_expenses', $_GET["expense_id"] , $fields); // updates database
+                header("Location: store_admin.php?id=edit_expense&expense_id=".$_GET["expense_id"]); //redirects to product page
+                die();
+                }
+                
+
+                // uploads Zip File
+                if($post_type == "upload_zip"){
+
+                    //checks if there is a file to upload
+                    if($_FILES['zip_upload']['size'] === 0) {
+                        header("Location: store_admin.php?id=edit_expense&expense_id=".$_GET["expense_id"]); //redirects to product page
+                        die();
+                    }
+                    
+                    //Set directory path
+                    $uploaddir = 'usersc/plugins/simple_store/downloads/';
+                    $imageFileType = strtolower(pathinfo($_FILES['zip_upload']['name'],PATHINFO_EXTENSION));
+                    
+                    
+                    $id = $_GET["expense_id"]; //get lastID
+                    
+                    //Upload downloadable file 
+                    $uploadfile = $uploaddir . "expense_".$id.".".$imageFileType;
+                    $uploadfile_name = "expense_".$id.".".$imageFileType;;
+                    echo '<pre>';
+                    if (move_uploaded_file($_FILES['zip_upload']['tmp_name'], $uploadfile)) {
+                        echo "File is valid, and was successfully uploaded.\n";
+                    } else {
+                        echo "Possible file upload attack!\n or... check what your upload limit is";
+                    }
+                    print "</pre>";
+                    
+                    
+                    //prepping fields for database
+                    $fields = [
+                    'file' => $uploadfile_name,
+                    ];
+                    $result = $db->update('simple_store_expenses', $id, $fields); //updates database 
+                     header("Location: store_admin.php?id=edit_expense&expense_id=".$_GET["expense_id"]); // redirects to product page once completed
+                     die();
+                }
+
+            }
+            
+            //this is for links. 
+             if(isset($_GET["post"])){
+                 $post_type = $_GET["post"]; // sets post type
+                 
+                // deletes image
+                if($post_type == "delete_download"){
+                    $expense_info = $db->query("SELECT * FROM simple_store_expenses WHERE id = ?", [$_GET["expense_id"]])->first(); // used to get image source
+                    unlink($abs_us_root . $us_url_root .$expense_info->file); //deletes file
+                    $fields = [
+                    'file' => "",
+                    ];
+                    $result = $db->update('simple_store_expenses', $_GET["expense_id"], $fields); //updates database 
+                    header("Location: store_admin.php?id=edit_expense&expense_id=".$_GET["expense_id"]); //Redirects to edit product page
+                    die();
+                }
+                
+            }
+            
+            
+            $expense_info = $db->query("SELECT * FROM simple_store_expenses WHERE id = ?",[$_GET["expense_id"]])->first(); // gets product info
+            
+            
+            echo "
+            <div class='order-confirmation-1'>
+              <div class='next-steps  p-4'  >
+                <h3 class='text-center'>Edit Expense</h3>
+                
+                 <section id='cart' class='cart section'>
+                  <div class='container' >
+                  <a class='btn btn-secondary' href='store_admin.php' aria-label='Go to Store admin Page'>Back to Store Admin</a> 
+                  <a class='btn btn-secondary' href='store_admin.php?id=expenses' aria-label='Go to Expenses Page'>Back to Expenses </a> 
+                  <br/><br/>
+                  <div class='row g-4'>
+                  <div class='col-lg-12' >
+                    <div class='cart-items'>
+                      <div class='cart-header d-none d-lg-block'>
+                        <div class='row align-items-center gy-4'>
+                          <div class='col-lg-12'>
+                            <h5>Expense</h5>
+                          </div>
+                        </div>
+                      </div>";
+                      
+                    $expense_downloads = $db->query("SELECT * FROM simple_store_expenses WHERE id = ? ", [$_GET["expense_id"]])->first(); // get images  
+                   
+                    //adds alert to add an receipt, just a recommendation
+                    if($expense_downloads->file == ""){
+                                echo '<div class="alert alert-light" role="alert">
+                                        You can upload a receipt for organization purposes
+                                      </div>';
+                            } 
+
+                      echo "
+                      <div class='cart-item' >
+                        <div class='row'>
+                          <div class='col-lg-12 col-12'>
+                            <div class='product-info d-flex '>
+                              <div class='product-details'>
+                              <form method='POST' action='?id=edit_expense&expense_id=".$_GET["expense_id"]."&post=general'>
+                                <span class='text-secondary'>Expense Name  : </span>
+                                <input type='text' class='form-control' id='expense_name' name='expense_name' value='".$expense_info->name."' placeholder='Expense Name' required>
+                                <br />
+                                <span class='text-secondary'>Expense Cost  : </span>
+                                <input type='text' class='form-control' id='expense_cost' name='expense_cost' value='".$expense_info->cost."' placeholder='Expense Cost' required>
+                                <br />
+                                <span class='text-secondary'>Include in total : </span>
+                                <select class='form-control' name='include_total' id='include_total'>
+                                    <option value='1' "; if($expense_info->include_total == "1"){echo "selected";} echo">Yes</option>
+                                    <option value='0' "; if($expense_info->include_total == "0"){echo "selected";} echo">No</option>
+                                </select>
+                                <br />
+                                
+                                <button type='submit' name='prod_details_form' value='prod_details_form' class='btn btn-success border rounded'>Update Info</button>
+                                <br /><br />
+                                <hr /><br />
+                              </form>
+                              </div>
+                            </div>";
+                            
+                            
+                            
+                            echo  "
+                            <hr /><br />
+                            
+                            </div>
+                            </div>
+                            <br />
+
+                            <div class='container border rounded'>
+                            <div class='container'>
+                            <br />";
+                            
+                            
+                            //if there are no download, ask to upload atleast one download
+                            if($expense_downloads->file == ""){
+                                echo '<div class="alert alert-light" role="alert">
+                                        Please Upload atleast a file.
+                                      </div>';
+                            } else {
+                                echo "
+                                    <div class='product-info row'>
+                                    <span class='text-secondary'>Download : </span>
+                                    
+                                    <div>
+                                        <a href='/downloads/expenses.php?id=".$expense_downloads->id."' alt='Product' class='btn btn-secondary' loading='lazy'>Download</a>
+                                        <br/><br />
+                                        <a href='?id=edit_expense&expense_id=".$_GET["expense_id"]."&post=delete_download' class='btn btn-danger' aria-label='Delete Prodduct Download link'>Delete File</a>
+                                        <br /><br />
+                                    </div>
+                                     <br/><br />
+                                    </div>   
+                                        
+                                    ";
+                            }
+                            
+                            
+                            echo "
+                                <div class='alert alert-secondary' role='alert'>
+                                    Upload Your Downloadable File. Only one file allowed.<br />
+                                    Be aware of your max upload size. You can change that in you ini.php - Current max upload is ".ini_get("upload_max_filesize")."
+                                </div>
+                                <form method='POST' action='?id=edit_expense&expense_id=".$_GET["expense_id"]."&post=upload_zip' enctype='multipart/form-data'>
+                                    <input type='file' id='zip_upload' name='zip_upload'>
+                                    <br /><br />
+                                    <button type='submit' name='zip_form' value='zip_form' class='btn btn-success border rounded'>Upload File</button>
+                                    <br /><br />
+                                </form>
+                                <hr /><br />
+                            
+                            </div>
+                            </div>
+                            <br />
+                            
+                            <div class='product-info row'>
+                                <div class='product-details'>
+                                <a class='btn btn-danger' href='?id=delete_expense&expense_id=".$_GET["expense_id"]."' aria-label='Delete Expense'>Delete Expense</a>
+                                </div>   
+                            </div>
+                            <br /><hr /><br />
+                            
+                          </div>
+                        </div>
+                      </div></div></div></div></div></div>   
+            ";
+        }
+        
+//***** DELETE EXPENSE
+        if($page_id == "delete_expense"){
+            
+            // gets varient id
+            if(!isset($_GET["expense_id"])){
+                header("Location: store_admin.php?id=expenses");
+                die();
+            }
+            
+            // double checks if delete confirm
+             $delete_confirm = "";   
+             if(isset($_GET["confirm"])){
+                 $delete_confirm = $_GET["confirm"];   
+             }
+             
+             // finally deletes in database 
+             if($delete_confirm == "true"){
+                 $result = $db->delete('simple_store_expenses', ["id", "=", $_GET["expense_id"]]); // delete from database
+                  header("Location: store_admin.php?id=expenses"); // redirect to expenses page
+                  die();
+             }
+            echo "
+                <div class='order-confirmation-1'>
+                  <div class='next-steps  p-4'  >
+                    <h3 class='text-center'>Delete Expense</h3>
+                    
+                    <section id='cart' class='cart section'>
+                    <div class='container' >
+                      <a class='btn btn-secondary' href='store_admin.php' aria-label='Go to Store Admin Page'>Back to Store Admin</a>
+                      <a class='btn btn-secondary' href='store_admin.php?id=edit_expense&expense_id=".$_GET["expense_id"]."' aria-label='Go to Product Page'>Back to Expense Page</a> <br/><br/>
+                      <div class='row g-4'>
+                      <div class='col-lg-12' >
+                        <div class='cart-items'>
+                          <div class='cart-header d-none d-lg-block'>
+                            <div class='row align-items-center gy-4'>
+                              <div class='col-lg-12'>
+                                <h5>**This will DELETE from database.
+                                    <br /><br />
+                                    
+                                </h5>
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <div class='cart-item' >
+                            <div class='row'>
+                              <div class='col-lg-12 col-12'>
+                                <div class='product-info d-flex '>
+                                  <div class='product-details'>
+                                     <p class='text-center'>
+                                        Are you sure you want to delete?
+                                        <br /><br />
+                                        <a class='btn btn-danger' href='?id=delete_expense&expense_id=".$_GET["expense_id"]."&confirm=true' aria-label='Delete Expense'>Delete Expense </a>
+                                     </p>
+                                  </div>
+                                </div>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                         </div> 
+                        </div> 
+                    </div> 
+                  </div> 
+                </div>
+            
+            ";
+        }
+        
+//*****STATS PAGE
+        if($page_id == "stats"){ 
+            
+            $transactions_results = $db->query("SELECT * FROM simple_store_stripe_transactions")->results(); // get transactions
+            $transaction_total = "0";
+            foreach($transactions_results as $t_c) {
+                $transaction_total = $transaction_total + $t_c->amount_total;
+            }
+            
+            $expenses_results = $db->query("SELECT * FROM simple_store_expenses")->results(); // get transactions
+            $expenses_total = "0";
+            foreach($expenses_results as $e_c) {
+                $expenses_total = $expenses_total + $e_c->cost;
+            }
+            
+            $expenses_results = $db->query("SELECT * FROM simple_store_expenses")->results(); // get transactions
+            $expenses_total = "0";
+            foreach($expenses_results as $e_c) {
+                $expenses_total = $expenses_total + $e_c->cost;
+            }
+            
+            $purchase_results = $db->query("SELECT * FROM simple_store_products")->results(); // get transactions
+            $purchase_total = "0";
+            foreach($purchase_results as $p_c) {
+                $purchase_total = $purchase_total + $p_c->purchase_count;
+            }
+            
+        
+        ?>
+                    <h3 class='text-center'>Cool Numbers</h3>
+                    <div class='container' >
+                      <a class='btn btn-secondary' href='store_admin.php' aria-label='Go to Store Admin Page'>Back to Store Admin</a>
+                      <br />
+                      <hr />
+                    </div>
+                
+                    
+            <!-- Stats Section -->
+            <section id="stats" class="stats section ">
+        
+              <div class="container" data-aos="fade-up" data-aos-delay="100">
+        
+                <div class="row gy-4">
+        
+                  <div class="col-lg-3 col-md-6">
+                    <div class="stats-item">
+                      <i class="bi bi-emoji-smile"></i>
+                      <span data-purecounter-start="0" data-purecounter-end="<?=$transaction_total/100?>" data-purecounter-duration="1" data-purecounter-decimals="2" data-purecounter-currency="$" class="purecounter"></span>
+                      <p><span>Gross Revenue</span></p>
+                    </div>
+                  </div><!-- End Stats Item -->
+        
+                  <div class="col-lg-3 col-md-6">
+                    <div class="stats-item">
+                      <i class="bi bi-wallet2"></i>
+                      <span data-purecounter-start="0" data-purecounter-end="<?=$expenses_total?>" data-purecounter-duration="1"  data-purecounter-decimals="2" data-purecounter-currency="$" class="purecounter"></span>
+                      <p><span>Total Expenses</span></p>
+                    </div>
+                  </div><!-- End Stats Item -->
+                  
+                  <div class="col-lg-3 col-md-6">
+                    <div class="stats-item">
+                      <i class="bi bi-basket"></i>
+                      <span data-purecounter-start="0" data-purecounter-end="<?=count($transactions_results)?>" data-purecounter-duration="1" class="purecounter"></span>
+                      <p><span>Total Orders</span></p>
+                    </div>
+                  </div><!-- End Stats Item -->
+        
+                  <div class="col-lg-3 col-md-6">
+                    <div class="stats-item">
+                      <i class="bi bi-journal-richtext"></i>
+                      <span data-purecounter-start="0" data-purecounter-end="<?=$purchase_total?>" data-purecounter-duration="1" class="purecounter"></span>
+                      <p><span>Total Items Sold</span></p>
+                    </div>
+                  </div><!-- End Stats Item -->
+                  
+
+                </div>
+        
+              </div>
+        
+            </section><!-- /Stats Section -->
+            
+            
+            <!-- Order items -->
+            <div id="order-confirmation" class="order-confirmation section"><div class="main-content">
+              <div class="details-card" data-aos="fade-up" >
+                <div class=" card-header" data-toggle="collapse">
+                    <h3>
+                      <i class="bi bi-bag-check"></i>
+                      Most Popular Items (TOP 3)
+                    </h3>
+                    <i class="bi bi-chevron-down toggle-icon"></i>
+                  </div>
+                  <div class="card-body">
+                    <?php 
+                        $products_results = $db->query("SELECT * FROM simple_store_products ORDER BY `simple_store_products`.`purchase_count` DESC LIMIT 3")->results(); // get products
+                        if(count($products_results) == 0){
+                            echo "No items sold yet...";
+                        }
+                        foreach($products_results as $p) {
+                            $total_c = $p->price * $p->purchase_count;
+                            $product_image = $db->query("SELECT * FROM simple_store_products_images WHERE product_id = ? AND is_primary = ?", [$p->id, "1"])->results();
+                            //if the count is 0 show nothing, else show primary image 
+                            if(count($product_image) == 0){$image_src = ""; } else { $image_src = $product_image[0]->image;}
+                        ?> 
+                            <div class="item">
+                              <div class="item-image">
+                                <img src="<?=$image_src?>" alt="Product" loading="lazy">
+                              </div>
+                              <div class="item-details">
+                                <h4><?=$p->name?></h4>
+                                <div class="item-meta">
+                                  <span>Color: <?=$p->color?></span>
+                                </div>
+                                <div class="item-price">
+                                  <span class="quantity">Total sold <?=$p->purchase_count?> @</span>
+                                  <span class="quantity">$<?=$p->price?> = </span>
+                                  <span class="price">$<?=$total_c?></span>
+                                </div>
+                              </div>
+                            </div>
+                        <?php } ?> 
+    
+                  </div>
+                </div>
+                </div></div>
+                
+            
+        
+        <?php }            
         
 //*****KEYS PAGE
         if($page_id == "keys"){
