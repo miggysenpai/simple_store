@@ -1473,6 +1473,16 @@ if(!isset($_SESSION['cart'])){
                     header("Location: store_admin.php?id=edit_product&product_id=".$_GET["product_id"]); //Redirects to edit product page
                     die();
                 }
+
+                // deletes Download
+                if($post_type == "delete_download"){
+                    $download_info = $db->query("SELECT * FROM simple_store_products_downloads WHERE id = ?", [$_GET["download_id"]])->first(); // used to get image source
+                    $file_path = "usersc/plugins/simple_store/downloads/";
+                    unlink($abs_us_root . $us_url_root . $file_path .$download_info->download); //deletes image
+                    $result = $db->delete('simple_store_products_downloads',["id", "=",  $_GET["download_id"]]); //deletes from database
+                    header("Location: store_admin.php?id=edit_product&product_id=".$_GET["product_id"]); //Redirects to edit product page
+                    die();
+                }
                 
                 // makes image primary image
                 if($post_type == "make_primary"){
