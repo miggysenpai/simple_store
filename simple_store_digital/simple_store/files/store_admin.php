@@ -2659,7 +2659,7 @@ if(!isset($_SESSION['cart'])){
                                   
                                   if($cat_info->is_subcatergory == 0){
                                       echo "
-                                        <form method='POST' action='?id=edit_catergory&catergory_id".$_GET["catergory_id"]."&post=general'>
+                                        <form method='POST' action='?id=edit_catergory&catergory_id=".$_GET["catergory_id"]."&post=general'>
                                   
                                             <span class='text-secondary'>Catergory Name  : </span><input type='text' class='form-control' id='catergory_name' name='catergory_name' value='".$cat_info->name."' required></span>
                                             <br />
