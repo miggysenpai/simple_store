@@ -1028,7 +1028,7 @@ if(!isset($_SESSION['cart'])){
                     
                     
                     //Upload image 
-                    $uploadfile = $uploaddir . "brevo_image".$imageFileType;
+                    $uploadfile = $uploaddir . "brevo_image.".$imageFileType;
                     echo '<pre>';
                     if (move_uploaded_file($_FILES['image_upload']['tmp_name'], $uploadfile)) {
                         echo "File is valid, and was successfully uploaded.\n";
