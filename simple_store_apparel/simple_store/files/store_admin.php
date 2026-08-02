@@ -1413,6 +1413,32 @@ if(!isset($_SESSION['cart'])){
                     'is_primary' => $is_primary
                     ];
                     $result = $db->update('simple_store_products_images', $id, $fields); //updates database 
+
+                    
+                    if($is_primary == 1){ // Sets primary image for stripe.
+                        require_once 'usersc/plugins/simple_store/assets/stripe/vendor/autoload.php'; // required stripe stuff
+                        $stripe_key_check = $db->query("SELECT * FROM simple_store_stripe_keys")->first(); // get keys
+                        //decides which keys to use
+                        if($stripe_key_check->is_live == 1){
+                            $stripeSecretKey = $stripe_key_check->live_secret;
+                        } else {
+                            $stripeSecretKey = $stripe_key_check->sandbox_secret;
+                        }
+                        
+                        // creates a new product and price id via stripe api
+                        $stripe = new \Stripe\StripeClient($stripeSecretKey);
+                        
+                        $product_id_varient = $db->query("SELECT * FROM simple_store_products_variants WHERE product_id = ? ",[$_GET["product_id"]])->results(); 
+                        foreach($product_id_varient as $p_id_v){
+                            $product = $stripe->products->update(
+                              $p_id_v->prod_id,
+                              ['images' => ['https://'.$_SERVER['SERVER_NAME'].'/'.$uploadfile]]
+                            );
+                        }
+                        
+                        
+                    };
+                    
                      header("Location: store_admin.php?id=edit_product&product_id=".$_GET["product_id"]); // redirects to product page once completed
                      die();
                 }
@@ -1440,6 +1466,28 @@ if(!isset($_SESSION['cart'])){
                     
                     $fields2 = ["is_primary" => "1"];
                     $result2 = $db->update('simple_store_products_images', $_GET["img_id"], $fields2); // updates new `is_primary` to `1`
+
+                    //Updates image with Stripe                    
+                        require_once 'usersc/plugins/simple_store/assets/stripe/vendor/autoload.php'; // required stripe stuff
+                        $stripe_key_check = $db->query("SELECT * FROM simple_store_stripe_keys")->first(); // get keys
+                        //decides which keys to use
+                        if($stripe_key_check->is_live == 1){
+                            $stripeSecretKey = $stripe_key_check->live_secret;
+                        } else {
+                            $stripeSecretKey = $stripe_key_check->sandbox_secret;
+                        }
+                        
+                        // creates a new product and price id via stripe api
+                        $stripe = new \Stripe\StripeClient($stripeSecretKey);
+                        
+                        $product_id_varient = $db->query("SELECT * FROM simple_store_products_variants WHERE product_id = ? ",[$_GET["product_id"]])->results(); 
+                        foreach($product_id_varient as $p_id_v){
+                            $product = $stripe->products->update(
+                              $p_id_v->prod_id,
+                              ['images' => ['https://'.$_SERVER['SERVER_NAME'].'/'.$img_path->image]]
+                            );
+                        }
+
                     
                     header("Location: store_admin.php?id=edit_product&product_id=".$_GET["product_id"]); //Redirects to edit product page
                     die();
