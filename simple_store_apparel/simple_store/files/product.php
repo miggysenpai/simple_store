@@ -85,7 +85,17 @@ if (!empty($_POST)) {
          if(!isset($_SESSION['cart'])){
             $_SESSION['cart'] = [];
             } 
-        
+
+        // checks if its already in cart. if so, it adds one to it, then redirects to cart   
+        foreach($_SESSION['cart'] as &$prod){
+            if($post_size == $post_size && $prod['product_id'] == $post_id){
+                $newquantity = ++$prod['quantity'];
+                $prod['quantity'] = $newquantity;
+                header("Location: cart.php");
+                die();
+            }
+        } 
+           
         //adds product to cart, then redirects to cart for checkout    
         $_SESSION['cart'][] = $fields ; 
         header("Location: cart.php");
