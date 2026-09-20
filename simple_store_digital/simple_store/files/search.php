@@ -116,8 +116,8 @@ if(!isset($_SESSION['cart'])){
                 $product_image = $db->query("SELECT * FROM simple_store_products_images WHERE product_id = ? AND is_primary = ?", [$p->id, "1"])->results(); // checks for primary image
                 if(count($product_image) == 0){$image_src = ""; } else { $image_src = '<img src="'.$product_image[0]->image.'" class="card-img-top on-hover-zoom " alt="Product with the name '.$p->name.' in the '.$p->catergory.' catergory">';} //use primary image if available ?> 
                 <!-- Product -->
-                                  <a href="product.php?id=<?=$p->id?>" aria-label="Go to Product Page">
-                                  <div class="col-lg-3 col-md-6">
+                                  <a href="product.php?id=<?=$p->id?>" aria-label="Go to Product Page" class="col-lg-3 col-md-6">
+                                  <div >
                                     <div class="product-item">
                                       <div class="product-image">
                                           <?=$image_src?>
