@@ -1864,7 +1864,7 @@ if(!isset($_SESSION['cart'])){
                                      <p class='text-center'>
                                         Are you sure you want to delete?
                                         <br /><br />
-                                        <a class='btn btn-danger' href='?id=delete_varient&varient_id=".$_GET["varient_id"]."&confirm=true' aria-label='Delete Product Variant'>Delete Product Variant</a>
+                                        <a class='btn btn-danger' href='?id=delete_varient&varient_id=".$_GET["varient_id"]."&confirm=true&product_id=".$_GET["product_id"]."' aria-label='Delete Product Variant'>Delete Product Variant</a>
                                      </p>
                                   </div>
                                 </div>
