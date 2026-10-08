@@ -166,7 +166,7 @@ if(!isset($_SESSION['cart'])){
       <div class="container">
         <form class="search-form" action="<?php echo $us_url_root. 'search.php'; ?>" method="POST">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for products">
+            <input type="text" class="form-control" placeholder="Search for products" name="search">
             <button class="btn" type="submit">
               <i class="bi bi-search"></i>
             </button>
