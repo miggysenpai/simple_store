@@ -164,7 +164,7 @@ if(!isset($_SESSION['cart'])){
     <!-- Mobile Search Form -->
     <div class="collapse" id="mobileSearch">
       <div class="container">
-        <form class="search-form">
+        <form class="search-form" action="<?php echo $us_url_root. 'search.php'; ?>" method="POST">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for products">
             <button class="btn" type="submit">
