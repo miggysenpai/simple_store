@@ -89,7 +89,7 @@ if (!empty($_POST)) {
                 <h1 class="breadcrumbs">
                     <ol>
                     <li><a href="index.php" aria-label="Go to Home Page">shop</a></li>
-                    <li><a href="collections.php" aria-label="Go to Collections Page">Collections</a></li>
+                    <li><a href="index.php?id=shop_catergories" aria-label="Go to Collections Page">Collections</a></li>
                   </ol>
                 </h1>
               </div>
